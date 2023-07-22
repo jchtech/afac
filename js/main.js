@@ -52,6 +52,7 @@ function showAuthInfo() {
     document.getElementById("cuerpo").style.removeProperty('display');
     document.getElementById("login").style.setProperty('display', 'none'); 
     url = url + "email=" + window.identity.email; 
+    console.log("URL:" + url);
     document.getElementById("gas_afac").style.setProperty('src', url); 
      
   } else {

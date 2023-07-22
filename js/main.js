@@ -49,11 +49,15 @@ function showAuthInfo() {
 
     console.log("AUTHENTICATED IN AFAC");
     console.log("datos:" + window.identity.name + ' ' + window.identity.email + ' ' + window.identity.picture);
-    document.getElementById("cuerpo").style.removeProperty('display');
-    document.getElementById("login").style.setProperty('display', 'none'); 
+    //document.getElementById("login").style.setProperty('display', 'none'); 
+    document.getElementById("login").remove();       //borrar elemento del dom
+
     url = url + "email=" + window.identity.email; 
     console.log("URL:" + url);
     document.getElementById("gas_afac").style.setProperty('src', url); 
+    document.getElementById("cuerpo").appendChild(document.getElementById("enlace"));
+
+    document.getElementById("cuerpo").style.removeProperty('display');
      
   } else {
 
@@ -62,4 +66,5 @@ function showAuthInfo() {
     //document.getElementById("cuerpo").style.setProperty('display', 'none');
     document.getElementById("welcome").innerText = "Si us plau, utilitzeu un compte de google per fer login a l'aplicació";
   }
+
 }

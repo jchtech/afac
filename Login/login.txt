@@ -18,7 +18,7 @@
               });
               google.accounts.id.renderButton(
                 document.getElementById("buttonDiv"),
-                { theme: "outline", size: "large" }  // customization attributes
+                { theme: "outline", size: "large" }  // customization attributes  , PDTE ver las opciones
               );
               google.accounts.id.prompt(); // also display the One Tap dialog
             }

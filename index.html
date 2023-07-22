@@ -12,22 +12,18 @@
   
   <!-- Import Google Authentication -->
   <script src="https://accounts.google.com/gsi/client" async defer></script>
-
   <script src="js/main.js"></script>
 
 </head>
 
 <body>
 
-  <div>
-    <h1 id="welcome">Hello there!</h1>
+  <div style="color:white;">
 
-    <div id="alternative-login">
-      <p><b>Aquí muestra el botón de One Tap si no se ha podido logar automáticamente, nosotros querremos mostrarlo, porque si no no puede deslogar, no?</b></p>
-      <div id="buttonDiv"></div>
-    </div>
-
-    <div id="authenticated" style="display: none;">
+    <div id="welcome">Login the App</div>
+    <div id="buttonDiv"></div>
+    
+    <div id="authenticated" >
       <h3>Aquí muestra los datos de la cuenta Google si se ha podido autenticar</h3>
       <table id="token-table">
         <thead>

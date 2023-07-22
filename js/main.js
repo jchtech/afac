@@ -68,18 +68,18 @@ function destroyTable() {
 // si está logado, muestra la info de cabecera, nombre y foto y oculta botón de one-tap
 function showAuthInfo() {
   if (window.isAuthenticated) { 
-      console.log("llega a IS AUTHENTICATED");
-      document.getElementById("authenticated").style.removeProperty('display');
-      document.getElementById("welcome").innerHTML = "Hello <b>" + "${window.identity.name}!</b>" + 
-                                                     '<img src="${window.identity.picture}" style="padding: 0 2rem 0 2rem; border-radius: 50%;">';
-      document.getElementById("alternative-login").style.setProperty('display', 'none');    //ejemplo, poner y quitar styles
-      //document.getElementById("raw-token").innerText = window.token;                        //pues falla aquí porque parece que window.token es null
-      populateTable();
+    console.log("llega a IS AUTHENTICATED");
+    document.getElementById("cuerpo").style.removeProperty('display');
+    document.getElementById("authenticated").style.setProperty('display', 'none');
+    document.getElementById("welcome").innerHTML = "Hello <b>" + "${window.identity.name}!</b>" + 
+                                                   '<img src="${window.identity.picture}" style="padding: 0 2rem 0 2rem; border-radius: 50%;">';
+    populateTable();
+    console.log("datos:" + window.identity.name + ' ' + window.identity.email);
   } else {
     console.log("PUES LLEGA AQUI, NOT AUTHENTICATED");
-      document.getElementById("authenticated").style.setProperty('display', 'none');
-      document.getElementById("welcome").innerText = 'Hello there!';
-      document.getElementById("alternative-login").style.removeProperty('display');
-      destroyTable();
+    document.getElementById("authenticated").style.setProperty('display', 'none');
+    document.getElementById("cuerpo").style.setProperty('display', 'none');
+    document.getElementById("welcome").innerText = 'Hello there!';
+    destroyTable();
   }
 }

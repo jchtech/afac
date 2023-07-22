@@ -47,7 +47,7 @@ function showAuthInfo() {
     console.log("llega a IS AUTHENTICATED");
     //document.getElementById("cuerpo").style.removeProperty('display');
     //document.getElementById("authenticated").style.setProperty('display', 'none');
-    document.getElementById("welcome").innerHTML = '<img src="${window.identity.picture}" style="padding: 0 2rem 0 2rem; border-radius: 50%;">';
+    document.getElementById("welcome").innerHTML = '<img src="' + window.identity.picture + '" style="padding: 0 2rem 0 2rem; border-radius: 50%;">';
     console.log("datos:" + window.identity.name + ' ' + window.identity.email);
   } else {
     console.log("PUES LLEGA AQUI, NOT AUTHENTICATED");

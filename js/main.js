@@ -41,45 +41,18 @@ window.onload = function () {
   google.accounts.id.prompt();                //also display the One Tap dialog
 }
 
-//crea tabla con los datos recuperados
-function populateTable() {
-  var table = document.getElementById("token-table");
-  var keys = Object.keys(window.identity);
-  var j = 0;
-  for (var i = 1; i < keys.length; i++) {
-      var row = table.insertRow(i);
-      var cell1 = row.insertCell(0);
-      var cell2 = row.insertCell(1);
-      cell1.innerHTML = keys[j];
-      cell2.innerHTML = window.identity[keys[j]];
-      j++;
-  }
-}
-
-//borrar la tabla, que ya no la necesitamos
-function destroyTable() {
-  var table = document.getElementById("token-table");
-  var rowCount = table.rows.length;
-  for (var i = 1; i < rowCount; i++) {
-      table.deleteRow(i);
-  }
-}
-
 // si está logado, muestra la info de cabecera, nombre y foto y oculta botón de one-tap
 function showAuthInfo() {
   if (window.isAuthenticated) { 
     console.log("llega a IS AUTHENTICATED");
-    document.getElementById("cuerpo").style.removeProperty('display');
-    document.getElementById("authenticated").style.setProperty('display', 'none');
-    document.getElementById("welcome").innerHTML = "Hello <b>" + "${window.identity.name}!</b>" + 
-                                                   '<img src="${window.identity.picture}" style="padding: 0 2rem 0 2rem; border-radius: 50%;">';
-    populateTable();
+    //document.getElementById("cuerpo").style.removeProperty('display');
+    //document.getElementById("authenticated").style.setProperty('display', 'none');
+    document.getElementById("welcome").innerHTML = '<img src="${window.identity.picture}" style="padding: 0 2rem 0 2rem; border-radius: 50%;">';
     console.log("datos:" + window.identity.name + ' ' + window.identity.email);
   } else {
     console.log("PUES LLEGA AQUI, NOT AUTHENTICATED");
-    document.getElementById("authenticated").style.setProperty('display', 'none');
-    document.getElementById("cuerpo").style.setProperty('display', 'none');
-    document.getElementById("welcome").innerText = 'Hello there!';
-    destroyTable();
+    //document.getElementById("authenticated").style.setProperty('display', 'none');
+    //document.getElementById("cuerpo").style.setProperty('display', 'none');
+    document.getElementById("welcome").innerText = 'NOT AUTHENTICATED';
   }
 }

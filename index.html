@@ -9,19 +9,49 @@
   <link rel="shortcut icon" href="favicon.ico">
 
   <link rel="stylesheet" href="css/navegacion.css" >
+  
+  <!-- Import Google Authentication -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+  <script src="/js/main.js"></script>
 
 </head>
 
 <body>
+
+  <div>
+    <h1 id="welcome">Hello there!</h1>
+
+    <div id="alternative-login">
+      <p><b>Aquí muestra el botón de One Tap si no se ha podido logar automáticamente, nosotros querremos mostrarlo, porque si no no puede deslogar, no?</b></p>
+      <div id="buttonDiv"></div>
+    </div>
+
+    <div id="authenticated" style="display: none;">
+      <h3>Aquí muestra los datos de la cuenta Google si se ha podido autenticar</h3>
+      <table id="token-table">
+        <thead>
+          <tr>
+            <th>Key</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
   <div id="cuerpo">
     <iframe id="gas_afac"
       title="AFAC"
       width=100%
       height=100%
-      style="border: 0px; background: #71e092;"
+      style="border: 0px; background: #343a40;"
       src="https://script.google.com/macros/s/AKfycbw_MLUJXZe99Pk4YqNcfv6Ks1l9aYFBkPLKAbgUlXBOy_ImosqyuLMg5DAROr-wCpw1/exec">
     </iframe>
   </div>
+  
 </body>
 
 </html>

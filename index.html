@@ -34,9 +34,8 @@
 
   <template id="template-app">
     <div id="app">
-      <div id="enlace" v-if="userAutheticated">
+      <div id="enlace" v-if="userAutheticated" v-show="showFrame">
         <iframe id="gas_afac"
-          v-show="showFrame"
           v-on:load="loadframe"
           title="AFAC"
           width=100%
@@ -69,7 +68,7 @@
       },
       mounted: function(){     
         that = this;             
-        this.userAutheticated = false;
+        this.userAutheticated = true;
         window.onload = function () {
           google.accounts.id.initialize({
             client_id: "1009336245126-7a1g0qdglr9l7svpusr60h77bps9h6pr.apps.googleusercontent.com",
@@ -113,13 +112,17 @@
           return JSON.parse(payloadBuffer.toString());
         },
         loadframe: function(){
-        that = this;
-        //muestra el iframe una vez ya está cargado
-        //delay de 0,5segundos a ver si desaparece el flash blanco
-        setTimeout(() => {
-          that.showFrame = true;
-        }, 500);
-      },
+          console.log("aqui es cuando entra")
+          that = this;
+          //muestra el iframe una vez ya está cargado
+          //delay de 0,5segundos a ver si desaparece el flash blanco
+          setTimeout(() => {
+            that.showFrame = true;
+            console.log("y ahora se cumple el tiempo. that.showFrame " + that.showFrame);
+          }, 500);
+          console.log("y ya sale con that.showFrame " + that.showFrame);
+        }
+        
       }
     })
   </script>

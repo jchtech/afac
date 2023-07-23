@@ -108,7 +108,15 @@
           var base64Payload = token.split(".")[1];
           var payloadBuffer = Buffer.from(base64Payload, "base64");
           return JSON.parse(payloadBuffer.toString());
-        }
+        },
+        loadframe: function(){
+        //muestra el iframe una vez ya está cargado
+        //delay de 0,5segundos a ver si desaparece el flash blanco
+        setTimeout(() => {
+          this.showFrame = true;
+          this.loading = false;
+        }, 500);
+      },
       }
     })
   </script>

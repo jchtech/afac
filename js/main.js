@@ -55,7 +55,6 @@ function showAuthInfo() {
     url = url + "email=" + window.identity.email; 
     console.log("URL:" + url);
     document.getElementById("gas_afac").style.setProperty('src', url); 
-    document.getElementById("cuerpo").appendChild(document.getElementById("enlace"));
 
     document.getElementById("cuerpo").style.removeProperty('display');
      

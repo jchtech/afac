@@ -6,35 +6,89 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AFAC</title>
-  <link rel="shortcut icon" href="favicon.ico">
 
+  <link rel="shortcut icon" href="favicon.ico">
   <link rel="stylesheet" href="css/navegacion.css" >
   
   <!-- Import Google Authentication -->
   <script src="https://accounts.google.com/gsi/client" async defer></script>
-  <script src="js/main.js"></script>
+  <!--script src="js/main.js"></script-->
 
+  <!-- Importa links frameworks (Bootstrap, VueJs, Matrerialize...) -->
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <!--Import Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+  <!-- Import Jquery, Popper y Bootstrp Javascript para usar Toast, Modals, VNavs, y otras 
+  la 4.6.2, ya incluye el popper -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 </head>
 
 <body>
 
-  <div id="login" style="color:white; text-align: center; align-items: center; display: block; min-height: 50%; background:rgb(95, 75, 75);">
+  <div id="app">
+  </div>
 
-    <div id="welcome">S'està fent login a l'aplicació</div>
-   
-      <div id="buttonDiv"></div>
-    
-  </div>
+  <!-- Import VueJS Script -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+  <template id="template-app">
+    <div id="app">
+      <div v-if="userAutheticated">
+        <div id="enlace">
+          <iframe id="gas_afac"
+            title="AFAC"
+            width=100%
+            height=100%
+            style="border: 0px; background: #343a40;"
+            src="">
+          </iframe>
+        </div>
+      </div>
+      <div v-else="userAutheticated" style="width: 30%; color: white;">
+        <b>Si us plau, seleccioneu un compte per utilitzar l'aplicació</b> 
+        <div id="buttonDiv"></div>
+      </div>
+    </div>
+  </template>
   
-  <div id="cuerpo" style="display: none;">
-    <iframe id="gas_afac"
-      title="AFAC"
-      width=100%
-      height=100%
-      style="border: 0px; background: #343a40;"
-      src="">
-    </iframe>
-  </div>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      template: '#template-app',
+      data: {
+        userAutheticated: false,
+        url: "https://script.google.com/macros/s/AKfycbw_MLUJXZe99Pk4YqNcfv6Ks1l9aYFBkPLKAbgUlXBOy_ImosqyuLMg5DAROr-wCpw1/exec?",
+        identity: {},             // diccionario con los datos recuperados, ya descodificados desde el token
+        token: ''                 // token recuperado
+      },
+      mounted: function(){     
+        that = this;             
+        this.userAutheticated = false;
+        window.onload = function () {
+          google.accounts.id.initialize({
+            client_id: "1009336245126-7a1g0qdglr9l7svpusr60h77bps9h6pr.apps.googleusercontent.com",
+            callback: that.handleCredentialResponse,
+            auto_select: false
+          });
+          google.accounts.id.renderButton(
+            document.getElementById("buttonDiv"),
+            { theme: "outline", size: "large" }       //customization attributes (pdte ver en la documentación)
+          );
+          google.accounts.id.prompt();                //also display the One Tap dialog
+        }
+      },
+      methods: {
+        handleCredentialResponse: function(response) {
+          console.log("llega a la respuesta" + response.credential);
+          this.identity = this.parseJwt(response.credential);
+          this.url = this.url + "email=" + window.identity.email; 
+          this.userAutheticated = true; 
+        }
+      }
+    })
+  </script>
 
 </body>
 

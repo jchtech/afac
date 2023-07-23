@@ -12,8 +12,7 @@
   
   <!-- Import Google Authentication -->
   <script src="https://accounts.google.com/gsi/client" async defer></script>
-  <!--script src="js/main.js"></script-->
-
+  
   <!-- Importa links frameworks (Bootstrap, VueJs, Matrerialize...) -->
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
@@ -46,8 +45,9 @@
           </iframe>
         </div>
       </div>
-      <div v-else="userAutheticated" style="width: 30%; color: white;">
-        <b>Si us plau, seleccioneu un compte per utilitzar l'aplicació</b> 
+      <div v-else="userAutheticated" style="width: 50%; color: white; align-items: center;">
+        <br><br><br><br><br><br>
+        <b>Si us plau, seleccioneu l'usuari que utilitzarà l'aplicació</b> 
         <div id="buttonDiv"></div>
       </div>
     </div>
@@ -85,6 +85,17 @@
           this.identity = this.parseJwt(response.credential);
           this.url = this.url + "email=" + window.identity.email; 
           this.userAutheticated = true; 
+        },
+        // funciones para decodificar el token devuelto por Google
+        // Source: https://stackoverflow.com/a/47574303/4064162 Answer by user "Rafael Quintela"
+        // token, You can try to decode it by yourself in a webpage like "https://jwt.io/" or "https://jwt.ms/"
+        b64DecodeUnicode: function(str) {
+          decodeURIComponent(Array.prototype.map.call(atob(str), c =>
+                      '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join('')); 
+        },
+        parseJwt: function(token) {
+          that = this;
+          JSON.parse(that.b64DecodeUnicode(token.split('.')[1].replace('-', '+').replace('_', '/')));
         }
       }
     })

@@ -112,10 +112,11 @@
           return JSON.parse(payloadBuffer.toString());
         },
         loadframe: function(){
+        that = this;
         //muestra el iframe una vez ya está cargado
         //delay de 0,5segundos a ver si desaparece el flash blanco
         setTimeout(() => {
-          this.showFrame = true;
+          that.showFrame = true;
         }, 500);
       },
       }

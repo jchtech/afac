@@ -82,20 +82,26 @@
       methods: {
         handleCredentialResponse: function(response) {
           console.log("llega a la respuesta" + response.credential);
+
           this.identity = this.parseJwt(response.credential);
-          this.url = this.url + "email=" + window.identity.email; 
+          this.url = this.url + "email=" + this.identity.email; 
           this.userAutheticated = true; 
         },
         // funciones para decodificar el token devuelto por Google
         // Source: https://stackoverflow.com/a/47574303/4064162 Answer by user "Rafael Quintela"
         // token, You can try to decode it by yourself in a webpage like "https://jwt.io/" or "https://jwt.ms/"
         b64DecodeUnicode: function(str) {
-          decodeURIComponent(Array.prototype.map.call(atob(str), c =>
+          return decodeURIComponent(Array.prototype.map.call(atob(str), c =>
                       '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join('')); 
         },
         parseJwt: function(token) {
           that = this;
-          JSON.parse(that.b64DecodeUnicode(token.split('.')[1].replace('-', '+').replace('_', '/')));
+          return JSON.parse(that.b64DecodeUnicode(token.split('.')[1].replace('-', '+').replace('_', '/')));
+        },
+        decodeJwt: function(token) {
+          var base64Payload = token.split(".")[1];
+          var payloadBuffer = Buffer.from(base64Payload, "base64");
+          return JSON.parse(payloadBuffer.toString());
         }
       }
     })

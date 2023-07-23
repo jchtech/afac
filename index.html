@@ -37,6 +37,7 @@
       <div id="enlace" v-if="userAutheticated">
         <iframe id="gas_afac"
           v-show="showFrame"
+          v-on:load="loadframe"
           title="AFAC"
           width=100%
           height=100%

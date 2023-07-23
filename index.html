@@ -33,7 +33,7 @@
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
 
   <template id="template-app">
-    <div id="app">
+    <div id="app" style="align-items: center;">
       <div v-if="userAutheticated">
         <div id="enlace">
           <iframe id="gas_afac"
@@ -41,11 +41,11 @@
             width=100%
             height=100%
             style="border: 0px; background: #343a40;"
-            :src="">
+            :src="url">
           </iframe>
         </div>
       </div>
-      <div v-else="userAutheticated" style="width: 50%; color: white; align-items: center;">
+      <div v-else="userAutheticated" style="width: 50%; color: white; align-items: center; text-align: center; display:flex;">
         <br><br><br><br><br><br>
         <b>Si us plau, seleccioneu l'usuari que utilitzarà l'aplicació</b> 
         <div id="buttonDiv"></div>

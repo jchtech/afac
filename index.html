@@ -41,7 +41,7 @@
             width=100%
             height=100%
             style="border: 0px; background: #343a40;"
-            src="">
+            :src="">
           </iframe>
         </div>
       </div>
@@ -70,7 +70,7 @@
           google.accounts.id.initialize({
             client_id: "1009336245126-7a1g0qdglr9l7svpusr60h77bps9h6pr.apps.googleusercontent.com",
             callback: that.handleCredentialResponse,
-            auto_select: false
+            auto_select: true
           });
           google.accounts.id.renderButton(
             document.getElementById("buttonDiv"),
@@ -85,6 +85,8 @@
 
           this.identity = this.parseJwt(response.credential);
           this.url = this.url + "email=" + this.identity.email; 
+
+          console.log("pongo la url" + this.url);
           this.userAutheticated = true; 
         },
         // funciones para decodificar el token devuelto por Google

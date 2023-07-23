@@ -59,6 +59,7 @@
       el: '#app',
       template: '#template-app',
       data: {
+        showFrame: false,
         userAutheticated: false,
         url: "https://script.google.com/macros/s/AKfycbw_MLUJXZe99Pk4YqNcfv6Ks1l9aYFBkPLKAbgUlXBOy_ImosqyuLMg5DAROr-wCpw1/exec?",
         identity: {},             // diccionario con los datos recuperados, ya descodificados desde el token
@@ -85,8 +86,7 @@
       },
       methods: {
         handleCredentialResponse: function(response) {
-          console.log("llega a la respuesta" + response.credential);
-
+          //console.log("llega a la respuesta" + response.credential);
           this.identity = this.parseJwt(response.credential);
           this.url = this.url + "email=" + this.identity.email; 
 
@@ -108,6 +108,19 @@
           var base64Payload = token.split(".")[1];
           var payloadBuffer = Buffer.from(base64Payload, "base64");
           return JSON.parse(payloadBuffer.toString());
+        },
+        loadframe: function(){
+          console.log("aqui es cuando entra")
+          that = this;
+          //muestra el iframe una vez ya está cargado
+          //delay de 0,5segundos a ver si desaparece el flash blanco
+          setTimeout(() => {
+            that.showFrame = true;
+            that.userAutheticated = true; 
+            
+            console.log("y ahora se cumple el tiempo. that.showFrame " + that.showFrame);
+          }, 500);
+          console.log("y ya sale con that.showFrame " + that.showFrame);
         }
         
       }
